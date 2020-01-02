@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <title>Keops</title>
+  
+   <meta name="viewport" content="width=device-width, user-scalable=no"/>
+  
+   <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+   <link href="/css/style.css" rel="stylesheet"/>
+</head>
+<body>
+  
+<div class="container">
+   <div class="jumbotron">
+       <h1>Keops System</h1>
+   </div>
+  
+   <h4>
+       Nova música
+   </h4>
+  
+   <form th:action="@{/playlists/{playlistId}/musicas/salvar(playlistId=${playlistId})}" th:method="${musica.id} == 0 ? post : put" th:object="${musica}">
+       <div class="row">
+           <input id="id" type="hidden" th:field="${musica.id}"/>
+           <div class="form-group col-md-4">
+               <label for="titulo">Título:</label>
+               <input class="form-control" id="titulo" type="text" th:field="${musica.titulo}"/>
+               <div th:if="${#fields.hasErrors('titulo')}" th:errors="${titulo}"></div>
+           </div>
+  
+           <div class="form-group col-md-4">
+               <label for="banda">Banda:</label>
+               <input class="form-control" id="banda" type="text" th:field="${musica.banda}"/>
+               <div th:if="${#fields.hasErrors('banda')}" th:errors="${musica.banda}"></div>
+           </div>
+  
+           <div class="form-group col-md-4">
+               <label for="nota">Nota:</label>
+               <input class="form-control" id="nota" type="number" th:field="${musica.nota}"/>
+               <div th:if="${#fields.hasErrors('nota')}" th:errors="${musica.nota}"></div>
+           </div>
+  
+       </div>
+       <div class="form-group">
+           <button class="btn btn-primary" type="submit">Salvar</button>
+       </div>
+  
+   </form>
+   <hr/>
+  
+   <a class="btn btn-light" th:href="@{/playlists/{playlistId}/musicas/listar(playlistId=${playlistId})}">Voltar</a>
+  
+   <hr/>
+   <footer class="footer">
+      <p>©2019 By Keops</p>
+   </footer>
+  
+</div>
+</body>
+</html>
